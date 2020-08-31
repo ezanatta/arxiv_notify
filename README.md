@@ -35,6 +35,10 @@ export ARXIV_NOTIFY_FOLDER='/path-to-save-folder'
 
 Conveniently (for me), the saved file follows the standard of the vim-notes plugin.
 
+USAGE:
+
+python3 arxiv-notify.py
+
 
 BUGS:
 
@@ -42,4 +46,8 @@ My goal is to have this script to run silently in the background and update dail
 
 I only guarantee that it works for keywords with no spaces. Theoretically it should work for multiple words, like 'Globular cluster', but somehow it doesn't work sometimes. So in a case like this, for example, use "Globular" instead and it will work fine. 
 
+TODO:
 
+- Make it run silently and update daily
+- Make it work with spaced keywords
+- Add multiple feeds
