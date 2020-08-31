@@ -1,4 +1,4 @@
-Arxiv Notify
+#Arxiv Notify
 
 C'mon, someone already did this before and for sure much better than this, but...
 
@@ -6,13 +6,13 @@ This is a very simple python script to gather any ArXiv RSS feed and save the pa
 
 When arxiv_notify is run, it runs through the RSS feed and shows notifications in the desktop for the papers it found within those constraints. Additionally, it saves a file on a user chose location with the saved papers for each day (the ArXiv rss updates daily, just like the site).
 
-#Dependencies:
+##Dependencies:
 
 Python 3+<br/>
 feedparser<br/> 
 gi<br/> 
 
-#Setup:
+##Setup:
 
 When you run arxiv-notify.py the first time it will attempt to create two files in the /home/.config/arxiv_notify/ folder: 'tags' and 'feed'.
 
@@ -35,18 +35,18 @@ export ARXIV_NOTIFY_FOLDER='/path-to-save-folder'
 
 Conveniently (for me), the saved file follows the standard of the vim-notes plugin (markdown).
 
-#USAGE:
+##USAGE:
 
 python3 arxiv-notify.py
 
 
-#BUGS:
+##BUGS:
 
 My goal is to have this script to run silently in the background and update daily. I'm still working on how I could this in the best way possible, so for now you'll have to run it manually everytime. And due to this, obvisouly if you run it more than one time in a single day it will created a repeated entry in the file saved in the ARXIV_NOTIFY_FOLDER. 
 
 I only guarantee that it works for keywords with no spaces. Theoretically it should work for multiple words, like 'Globular cluster', but somehow it doesn't work sometimes. So in a case like this, for example, use "Globular" instead and it will work fine. 
 
-#TODO:
+##TODO:
 * Make it run silently and update daily
 * Make it work with spaced keywords
 * Add multiple feeds
