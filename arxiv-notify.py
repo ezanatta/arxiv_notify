@@ -51,17 +51,20 @@ def arxivnotify():
                 papers.append(title)
                 links.append(entry.link)
 
-    pl = zip(papers, links)
+    with open(anf+'arxiv_weekly_notes') as g:
+        if str(date.today().strftime("%d/%m/%y")) not in g.read():
+            g.close()
+            with open(anf+'arxiv_weekly_notes', 'a') as g:
+                g.write('#'+str(date.today().strftime("%d/%m/%y"))+'\n\n')
 
-    with open(anf+'arxiv_weekly_notes', 'a') as g:
-        g.write('#'+str(date.today().strftime("%d/%m/%y"))+'\n\n')
-
-    for p in pl:
-        Notify.init('Arxiv Notification')
-        Notify.Notification.new(summary=p[0], body='<a href=\"'+p[1]+'\">'+p[1]+'</a> \n').show()
-
-        with open(anf+'arxiv_weekly_notes', 'a') as g:
-            g.write(p[0]+'\n'+p[1]+' \n')
+    for p in zip(papers, links):
+        with open(anf+'arxiv_weekly_notes') as g:
+            if str(p[1]) not in g.read():
+                g.close()
+                with open(anf+'arxiv_weekly_notes', 'a') as g:
+                    g.write(p[0]+'\n'+p[1]+' \n')
+                # Notify.init('Arxiv Notification')
+                # Notify.Notification.new(summary=p[0], body='<a href=\"'+p[1]+'\">'+p[1]+'</a> \n').show()
 
 
 
