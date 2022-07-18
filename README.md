@@ -42,7 +42,7 @@ python3 arxiv-notify.py
 
 ##BUGS:
 
-My goal is to have this script to run silently in the background and update daily. I'm still working on how I could this in the best way possible, so for now you'll have to run it manually everytime. And due to this, obvisouly if you run it more than one time in a single day it will created a repeated entry in the file saved in the ARXIV_NOTIFY_FOLDER. 
+My goal is to have this script to run silently in the background and update daily. I'm still working on how I could this in the best way possible, so for now you'll have to run it manually everytime. 
 
 I only guarantee that it works for keywords with no spaces. Theoretically it should work for multiple words, like 'Globular cluster', but somehow it doesn't work sometimes. So in a case like this, for example, use "Globular" instead and it will work fine. 
 
