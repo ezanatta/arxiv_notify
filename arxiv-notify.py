@@ -7,6 +7,7 @@ from threading import Timer
 import os
 from pathlib import Path
 import sys
+import argparse
 
 def setup():
 
@@ -20,19 +21,20 @@ def setup():
     print('In bash you can add \n export ARXIV_NOTIFY_FOLDER=\'path-to-save-folder\' to .bashrc, for instance.')
 
 
-def arxivnotify():
+def arxivnotify(v):
 
     papers = list()
     links = list()
+    summaries = list()
 
     try:
-        with open(home+'/.config/arxiv-notify/tags', 'r') as f:
+        with open(conf_path+'tags', 'r') as f:
             tags = [line.rstrip('\n') for line in f]
     except:
         print('tags file not found!')
         sys.exit()
     try:
-        with open(home+'/.config/arxiv-notify/feed', 'r') as f:
+        with open(conf_path+'feed', 'r') as f:
             feed = [line.rstrip('\n') for line in f]
     except:
         feed = list('astro-ph')
@@ -40,16 +42,29 @@ def arxivnotify():
     url = 'http://arxiv.org/rss/'+feed[0]
     data = feedparser.parse(url)
 
+
+    if(v==1):
+        print('Scraped papers for today:')
+        for entry in data.entries:
+            title = entry.title[0:entry.title.rfind('. ')]
+            print("{0}".format(title))
+    elif(v==2):
+        print('Scraped papers for today:')
+        for entry in data.entries:
+            title = entry.title[0:entry.title.rfind('. ')]
+            print("{0}".format(title))
+        print('\nKeywords loaded for searching:')
+        for tag in tags:
+            print("{0}".format(tag))
+
     for entry in data.entries:
 
-        title = entry.title
-        title = title[:len(title)-36]
-        title = title[0:title.rfind('.')]    #removing the arxiv code stuff
-
         for tag in tags:
-            if tag in title.split():
-                papers.append(title)
+            if (tag.lower() in entry.title.lower()) or ((tag.lower() in entry.summary.lower())):
+                papers.append(entry.title[0:entry.title.rfind('. ')])    #removing the arxiv code stuff
                 links.append(entry.link)
+                summaries.append(entry.summary)
+
 
     with open(anf+'arxiv_weekly_notes') as g:
         if str(date.today().strftime("%d/%m/%y")) not in g.read():
@@ -66,11 +81,20 @@ def arxivnotify():
                 # Notify.init('Arxiv Notification')
                 # Notify.Notification.new(summary=p[0], body='<a href=\"'+p[1]+'\">'+p[1]+'</a> \n').show()
 
-
+##### main ####
 
 home = os.path.expanduser("~")
 
-if not os.path.exists(home+'/.config/arxiv-notify/feed'):
+parser = argparse.ArgumentParser()
+parser.add_argument("-c", default='/.config/arxiv-notify/', help="path to configuration folder", type=str, nargs='?')
+parser.add_argument("-v", default=0, help="verbose level; 0: quiet, 1: print today's papers, 2:print today's papers and tags being looked into them", type=int, nargs='?')
+args = parser.parse_args()
+
+conf_path = home+args.c
+verbosity = args.v
+
+
+if not os.path.exists(conf_path):
     setup()
 try:
     anf = os.getenv('ARXIV_NOTIFY_FOLDER')
@@ -79,4 +103,4 @@ except:
     sys.exit()
 
 
-arxivnotify()
+arxivnotify(verbosity)
