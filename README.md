@@ -5,13 +5,14 @@ C'mon, someone already did this before and for sure much better than this, but..
 
 This is a very simple python script to gather any ArXiv RSS feed and save the papers that have specific keywords in the title or abstract. Keywords are get from a user generated file in the configuration folder. It runs through the RSS feed and saves a file on a user chosen location with the saved papers for each day (the ArXiv rss updates daily, just like the site).
 
-##Dependencies:
+Dependencies:
+------------
 
 Python 3+<br/>
 feedparser<br/> 
 
-##Setup:
-
+Setup:
+-----
 
 When you run arxiv-notify.py the first time it will attempt to create two files in the /home/.config/arxiv_notify/ folder: 'tags' and 'feed'.
 
@@ -34,15 +35,18 @@ Finally, you'll want to have an environment variable called 'ARXIV_NOTIFY_FOLDER
 
 Conveniently (for me), the saved file follows the standard of the vim-notes plugin (markdown).
 
-##USAGE:
+USAGE:
+------
 
     $ python arxiv-notify
 
-##BUGS:
+BUGS:
+-----
 
 My goal is to have this script to run silently in the background and update daily. I'm still working on how I could this in the best way possible, so for now you'll have to run it manually everytime. 
 
-##TODO:
+TODO:
+-----
 
     * Make it run silently and update daily
     * Add multiple feeds
