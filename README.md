@@ -3,7 +3,7 @@ Arxiv Notify
 
 C'mon, someone already did this before and for sure much better than this, but...
 
-This is a very simple python script to gather any ArXiv RSS feed and save the papers that have specific keywords in the title or abstract. Keywords are get from a user generated file in the configuration folder. It runs through the RSS feed and saves a file on a user chosen location with the saved papers for each day (the ArXiv rss updates daily, just like the site).
+This is a very simple python script to gather any ArXiv RSS feed and save the papers that have specific keywords in the title or abstract. Keywords are get from an user generated file in the configuration folder. It runs through the RSS feed and saves a file on a user chosen location with the saved papers for each day (the ArXiv rss updates daily, just like the site).
 
 Dependencies
 ------------

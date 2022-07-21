@@ -82,7 +82,7 @@ def arxivnotify(v):
 home = os.path.expanduser("~")
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-c", default='/.config/arxiv-notify/', help="path to configuration folder", type=str, nargs='?')
+parser.add_argument("-c", default='/.config/arxiv-notify/', help="path to configuration folder (if not on the default location)", type=str, nargs='?')
 parser.add_argument("-v", default=0, help="verbose level; 0: quiet, 1: print today's papers, 2:print today's papers and tags being looked into them", type=int, nargs='?')
 args = parser.parse_args()
 
