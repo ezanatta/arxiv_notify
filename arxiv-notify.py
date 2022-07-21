@@ -76,26 +76,26 @@ def arxivnotify(v):
                 with open(anf+'arxiv_weekly_notes', 'a') as g:
                     g.write(p[0]+'\n'+p[1]+' \n')
 
-##### main ####
+if __name__ == "__main__":
 
-home = os.path.expanduser("~")
+    home = os.path.expanduser("~")
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-c", default='/.config/arxiv-notify/', help="path to configuration folder (if not on the default location)", type=str, nargs='?')
-parser.add_argument("-v", default=0, help="verbose level; 0: quiet, 1: print today's papers, 2:print today's papers and tags being looked into them", type=int, nargs='?')
-args = parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", default='/.config/arxiv-notify/', help="path to configuration folder (if not on the default location)", type=str, nargs='?')
+    parser.add_argument("-v", default=0, help="verbose level; 0: quiet, 1: print today's papers, 2:print today's papers and tags being looked into them", type=int, nargs='?')
+    args = parser.parse_args()
 
-conf_path = home+args.c
-verbosity = args.v
-
-
-if not os.path.exists(conf_path):
-    setup()
-try:
-    anf = os.getenv('ARXIV_NOTIFY_FOLDER')
-except:
-    print('ARXIV_NOTIFY_FOLDER environment variable not found!')
-    sys.exit()
+    conf_path = home+args.c
+    verbosity = args.v
 
 
-arxivnotify(verbosity)
+    if not os.path.exists(conf_path):
+        setup()
+    try:
+        anf = os.getenv('ARXIV_NOTIFY_FOLDER')
+    except:
+        print('ARXIV_NOTIFY_FOLDER environment variable not found!')
+        sys.exit()
+
+
+    arxivnotify(verbosity)
