@@ -1,7 +1,5 @@
 import feedparser
 import gi
-gi.require_version('Notify', '0.7')
-from gi.repository import Notify
 from datetime import date, datetime, timedelta
 from threading import Timer
 import os
@@ -78,8 +76,6 @@ def arxivnotify(v):
                 g.close()
                 with open(anf+'arxiv_weekly_notes', 'a') as g:
                     g.write(p[0]+'\n'+p[1]+' \n')
-                # Notify.init('Arxiv Notification')
-                # Notify.Notification.new(summary=p[0], body='<a href=\"'+p[1]+'\">'+p[1]+'</a> \n').show()
 
 ##### main ####
 
