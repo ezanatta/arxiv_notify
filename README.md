@@ -19,14 +19,14 @@ You can create them yourself if you want to be safe or if for some reason the co
 
 The 'tags' file should have the keywords you want your papers to have on the titles, one for each line. Like this:
 
-globular<br/> 
-nuclei<br/>
-dark matter<br/> 
-halo<br/>
+    globular<br/> 
+    nuclei<br/>
+    dark matter<br/> 
+    halo<br/>
 
 The 'feed' file lists the feeds that you want arxiv_notify to check for these keywords. Currently only ONE feed is available at a time, but in the future I want to add the option to search multiple feeds if needed. If the user don't create this file or leave it empty, the default feed is the whole astro.ph. However, you can select individual topics. For instance, if one wants to look into only the extragalactic papers, you would simply add this line to the 'feed' file:
 
-astro-ph.GA
+    astro-ph.GA
 
 Finally, you'll want to have an environment variable called 'ARXIV_NOTIFY_FOLDER' where arxiv_notify will save a text file with the papers it found, separated by day. For instance, in bash, you can add this line to .bashrc:
 
