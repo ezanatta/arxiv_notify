@@ -30,16 +30,12 @@ The 'feed' file lists the feeds that you want arxiv_notify to check for these ke
 
 Finally, you'll want to have an environment variable called 'ARXIV_NOTIFY_FOLDER' where arxiv_notify will save a text file with the papers it found, separated by day. For instance, in bash, you can add this line to .bashrc:
 
-.. code-block :: bash 
-
      $ export ARXIV_NOTIFY_FOLDER='/path-to-save-folder'
 
 Conveniently (for me), the saved file follows the standard of the vim-notes plugin (markdown).
 
 ##USAGE:
 
-.. code-block:: python
-        
     $ python arxiv-notify
 
 ##BUGS:
