@@ -1,5 +1,4 @@
 import feedparser
-import gi
 from datetime import date, datetime, timedelta
 from threading import Timer
 import os
