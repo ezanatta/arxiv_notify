@@ -23,6 +23,7 @@ def arxivnotify(v):
     papers = list()
     links = list()
     summaries = list()
+    found_tags = list()
 
     try:
         with open(conf_path+'tags', 'r') as f:
@@ -61,6 +62,7 @@ def arxivnotify(v):
                 papers.append(entry.title[0:entry.title.rfind('. ')])    #removing the arxiv code stuff
                 links.append(entry.link)
                 summaries.append(entry.summary)
+                found_tags.append(tag)
 
 
     with open(anf+'arxiv_weekly_notes') as g:
@@ -69,12 +71,12 @@ def arxivnotify(v):
             with open(anf+'arxiv_weekly_notes', 'a') as g:
                 g.write('#'+str(date.today().strftime("%d/%m/%y"))+'\n\n')
 
-    for p in zip(papers, links):
+    for p in zip(papers, links, found_tags):
         with open(anf+'arxiv_weekly_notes') as g:
             if str(p[1]) not in g.read():
                 g.close()
                 with open(anf+'arxiv_weekly_notes', 'a') as g:
-                    g.write(p[0]+'\n'+p[1]+' \n')
+                    g.write('*'+p[0]+'*\n'+p[1]+' \n_Keyword found:_ '+p[2]+'\n\n')
 
 if __name__ == "__main__":
 
