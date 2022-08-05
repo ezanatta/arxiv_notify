@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import sys
 import argparse
+from bs4 import BeautifulSoup as bs
 
 def setup():
 
@@ -42,12 +43,12 @@ def arxivnotify(v):
 
 
     if(v==1):
-        print('Scraped papers for today:')
+        print('Scrapped papers for today:')
         for entry in data.entries:
             title = entry.title[0:entry.title.rfind('. ')]
             print("{0}".format(title))
     elif(v==2):
-        print('Scraped papers for today:')
+        print('Scrapped papers for today:')
         for entry in data.entries:
             title = entry.title[0:entry.title.rfind('. ')]
             print("{0}".format(title))
@@ -61,7 +62,7 @@ def arxivnotify(v):
             if (tag.lower() in entry.title.lower()) or ((tag.lower() in entry.summary.lower())):
                 papers.append(entry.title[0:entry.title.rfind('. ')])    #removing the arxiv code stuff
                 links.append(entry.link)
-                summaries.append(entry.summary)
+                summaries.append(bs(entry.summary, 'lxml').text.replace('\n', ' '))
                 found_tags.append(tag)
 
 
@@ -71,12 +72,12 @@ def arxivnotify(v):
             with open(anf+'arxiv_weekly_notes', 'a') as g:
                 g.write('#'+str(date.today().strftime("%d/%m/%y"))+'\n\n')
 
-    for p in zip(papers, links, found_tags):
+    for p in zip(papers, links, found_tags, summaries):
         with open(anf+'arxiv_weekly_notes') as g:
             if str(p[1]) not in g.read():
                 g.close()
                 with open(anf+'arxiv_weekly_notes', 'a') as g:
-                    g.write('*'+p[0]+'*\n'+p[1]+' \n_Keyword found:_ '+p[2]+'\n\n')
+                    g.write('*'+p[0]+'*\n'+p[1]+'\n_Keyword found:_ '+p[2]+'\n'+p[3]+'\n\n')
 
 if __name__ == "__main__":
 
